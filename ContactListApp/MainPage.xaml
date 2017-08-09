@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ContactListApp"
+             x:Class="ContactListApp.MainPage">
+
+    <StackLayout Padding="10" Spacing="10">
+        
+        <Label Text="MVVM Xamarin.Forms!" 
+           VerticalOptions="Center" 
+           HorizontalOptions="Center" />
+        
+        <StackLayout>
+            <Button Text="Cargar Contactos" Command="{Binding CommandLoadContactList}" />
+        </StackLayout>
+        <ListView ItemsSource="{Binding contactList}"
+                  IsRefreshing="{Binding IsBusy}"
+                  IsPullToRefreshEnabled="True"
+                  RefreshCommand="{Binding CommandRefreshContactList}"
+                  SelectedItem="{Binding SelectedContact}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.View>
+                            <StackLayout Padding="20,0,20,0"
+                                     Orientation="Horizontal"
+                                     HorizontalOptions="FillAndExpand">
+
+                                <Label Text="{Binding lastName}" />
+                                <Label Text="{Binding firstName}" />
+
+                            </StackLayout>
+                        </ViewCell.View>
+
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+        <StackLayout>
+            <ActivityIndicator IsRunning="{Binding IsBusy}"/>
+        </StackLayout>
+    </StackLayout>
+    
+
+</ContentPage>
